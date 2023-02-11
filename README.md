@@ -1,5 +1,5 @@
 # TSTL Extensions
-![npm (scoped)](https://img.shields.io/npm/v/@cheatoid/tstl-extensions?style=for-the-badge)
+[![npm (scoped)](https://img.shields.io/npm/v/@cheatoid/tstl-extensions?style=for-the-badge)](https://www.npmjs.com/package/@cheatoid/tstl-extensions)
 
 Plugin for [TSTL](https://github.com/TypeScriptToLua/TypeScriptToLua) which provides various low-level extensions.
 
