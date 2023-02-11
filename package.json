@@ -1,6 +1,6 @@
 {
   "name": "@cheatoid/tstl-extensions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Plugin for TSTL which provides various low-level extensions",
   "repository": {
     "type": "git",
@@ -20,11 +20,11 @@
     "extensions"
   ],
   "files": [
-    "**.ts",
+    "**.js",
     "**.d.ts"
   ],
   "types": "index.d.ts",
-  "main": "",
+  "main": "dist/index.js",
   "scripts": {
     "build": "npx tsc"
   },
