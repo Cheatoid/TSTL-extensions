@@ -9,9 +9,15 @@ Plugin for [TSTL](https://github.com/TypeScriptToLua/TypeScriptToLua) which prov
 2. Edit your `tsconfig.json` file accordingly to enable the plugin:
     ```diff
     {
+      "compilerOptions": {
+        "types": [
+    +     "@typescript-to-lua/language-extensions",
+    +     "@cheatoid/tstl-extensions",
+        ]
+      },
       "tstl": {
         "luaPlugins": [
-    +      { "name": "@cheatoid/tstl-extensions/dist/index.js" },
+    +     { "name": "@cheatoid/tstl-extensions/dist/index.js" },
         ]
       }
     }

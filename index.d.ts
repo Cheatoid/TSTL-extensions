@@ -1,3 +1,5 @@
+/// <reference types="@typescript-to-lua/language-extensions" />
+
 /**
  * Emits a Lua continue statement.
  * @emits `continue`
