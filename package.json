@@ -1,0 +1,35 @@
+{
+  "name": "@cheatoid/tstl-extensions",
+  "version": "1.0.0",
+  "description": "Plugin for TSTL which provides various low-level extensions",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cheatoid/TSTL-extensions.git"
+  },
+  "homepage": "https://github.com/Cheatoid/TSTL-extensions#readme",
+  "author": "Cheatoid",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cheatoid/TSTL-extensions/issues"
+  },
+  "keywords": [
+    "typescript",
+    "lua",
+    "tstl",
+    "plugin",
+    "extensions"
+  ],
+  "files": [
+    "**.ts",
+    "**.d.ts"
+  ],
+  "types": "index.d.ts",
+  "main": "",
+  "scripts": {
+    "build": "npx tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "typescript-to-lua": "^1.12.1"
+  }
+}
