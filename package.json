@@ -1,6 +1,6 @@
 {
   "name": "@cheatoid/tstl-extensions",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Plugin for TSTL which provides various low-level extensions",
   "repository": {
     "type": "git",

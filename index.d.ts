@@ -1,12 +1,6 @@
 /// <reference types="@typescript-to-lua/language-extensions" />
 
 /**
- * Emits a Lua continue statement.
- * @emits `continue`
- */
-declare function __continue(this: void): void;
-
-/**
  * Emits a Lua goto statement (requires Lua 5.2+ or JIT target).
  * @param label - The label name to jump to.
  * @emits `goto label`

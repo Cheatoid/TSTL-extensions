@@ -72,7 +72,7 @@ const plugin: tstl.Plugin = {
       // FIXME: Custom tsconfig option check doesn't work (despite being specified in the tsconfig file).
       // This is a dirty fix for accessing our custom tsconfig properties.
       const configText = fs.readFileSync(options.configFilePath, { encoding: "utf8" }); // (hopefully, it is the only tsconfig)
-      const customOptions = parse(configText, undefined, true) as any;
+      const customOptions = (parse(configText, undefined, true) as any)["tstlCustom"];
       options["luaContinueSupport"] = customOptions["luaContinueSupport"] === true;
     } catch {
       // ignored
@@ -103,9 +103,6 @@ const plugin: tstl.Plugin = {
         const expr = node.expression;
         if (ts.isCallExpression(expr) && ts.isIdentifier(expr.expression)) {
           switch (expr.expression.text) {
-            case "__continue": {
-              return tstl.createExpressionStatement(tstl.createIdentifier("continue", node), node);
-            }
             case "__goto": {
               if (context.luaTarget === tstl.LuaTarget.Lua50 || context.luaTarget === tstl.LuaTarget.Lua51) {
                 context.diagnostics.push(unsupportedForTarget(node, "goto", context.luaTarget));
