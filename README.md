@@ -60,8 +60,8 @@ The following table is hopefully self-explanatory:
 ### ***Efficient swapping***
 This allows you to swap two values [without a temporary variable](https://typescripttolua.github.io/play/#code/MYewdgzgLgBAhgJwTAvDA2gIgGYEsHSYA0MmEApqGACaYC6A3AFDqILoAMdJb6AjHTqoMvATySdBDGAHoZMKAE8ADrmBwANjAgB3OMqbKEuMFAAUUOACMN5AHRV15tiUykAlO4ZA):  
 The following table is hopefully self-explanatory:
-|          **TypeScript**          |              **Lua**              |
-| :------------------------------: | :-------------------------------: |
+|      **TypeScript**      |              **Lua**              |
+| :----------------------: | :-------------------------------: |
 | `__swap(arr[0], arr[1])` | `arr[1], arr[2] = arr[2], arr[1]` |
 
 
