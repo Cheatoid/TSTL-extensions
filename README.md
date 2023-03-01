@@ -62,7 +62,7 @@ This allows you to swap two values [without a temporary variable](https://typesc
 The following table is hopefully self-explanatory:
 |          **TypeScript**          |              **Lua**              |
 | :------------------------------: | :-------------------------------: |
-| `__swap(arr[0], arr[1])` | `arr[0], arr[1] = arr[1], arr[0]` |
+| `__swap(arr[0], arr[1])` | `arr[1], arr[2] = arr[2], arr[1]` |
 
 
 ### ***`unsafe_cast`***
