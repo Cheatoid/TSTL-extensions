@@ -30,7 +30,7 @@ Plugin for [TSTL](https://github.com/TypeScriptToLua/TypeScriptToLua) which prov
 Note: This plugin exposes most of low-level functionality via special functions which are prefixed with double-underscore (`__`).
 
 ### ***`continue` support***
-If your target Lua environment supports `continue` statement (such as Garry's Mod Lua)...
+If your target Lua environment supports `continue` statement (such as Garry's Mod Lua)...  
 Due to specific nature of this feature, you must explicitly opt-in by modifying your `tsconfig.json` file by appending the following on the bottom (outside of `"tstl"` node):
 ```diff
 {
@@ -49,21 +49,29 @@ With this change applied, you can use `continue` in your TS code and it will emi
 
 
 ### ***`goto` & label support***
-Only usable if your target Lua environment supports `goto` and labels (such as Lua 5.2+ or JIT)...
+Only usable if your target Lua environment supports `goto` and labels (such as Lua 5.2+ or JIT)...  
 The following table is hopefully self-explanatory:
-| **TypeScript** | **Lua** |
-|:---:|:---:|
-| `__goto("MyLabel")` | `goto MyLabel` |
-| `__label("MyLabel")` | `::MyLabel::` |
+|    **TypeScript**    |    **Lua**     |
+| :------------------: | :------------: |
+| `__goto("MyLabel")`  | `goto MyLabel` |
+| `__label("MyLabel")` | `::MyLabel::`  |
+
+
+### ***Efficient swapping***
+This allows you to swap two values [without a temporary variable](https://typescripttolua.github.io/play/#code/MYewdgzgLgBAhgJwTAvDA2gIgGYEsHSYA0MmEApqGACaYC6A3AFDqILoAMdJb6AjHTqoMvATySdBDGAHoZMKAE8ADrmBwANjAgB3OMqbKEuMFAAUUOACMN5AHRV15tiUykAlO4ZA):  
+The following table is hopefully self-explanatory:
+|          **TypeScript**          |              **Lua**              |
+| :------------------------------: | :-------------------------------: |
+| `__swap(arr[0], arr[1])` | `arr[0], arr[1] = arr[1], arr[0]` |
 
 
 ### ***`unsafe_cast`***
-This is useful in-place replacement for `as any` casting, because it allows to "find all references" quickly.
+This is useful in-place replacement for `as any` casting, because it allows to "find all references" quickly.  
 For example, instead of writing `foo as any as TheFoo` (or `<TheFoo><any>foo`), you can instead do `unsafe_cast<TheFoo>(foo)`.
 
 
 ### ***`next` iterator support***
-Call `__next` using for-of loop, you may optionally want to specify a starting index.
+Call `__next` using for-of loop, you may optionally want to specify a starting index.  
 Example usage:
 ```ts
 for (const [k, v] of __next(_G)) {
@@ -79,8 +87,8 @@ end
 
 
 ### ***Aggressive inlining***
-Function calls have certain performance overhead. This feature allows to inline the body of the given function in-place, which can be beneficial in hot-path for high-performance code. It mostly just works, but consider it as experimental.
-Currently there is a drawback in the implementation, the target function must be defined in the same file where you want to inline it.
+Function calls have certain performance overhead. This feature allows to inline the body of the given function in-place, which can be beneficial in hot-path for high-performance code. It mostly just works, but consider it as experimental.  
+Currently there is a drawback in the implementation, the target function must be defined in the same file where you want to inline it.  
 Simple example:
 ```ts
 function InlineExample(name: string) {
@@ -108,8 +116,8 @@ end
 
 
 ### ***Top-level return***
-This feature allows you to bypass TypeScript limitation - ts(1108) error.
-You should only consider this as a last resort option (hint: try using export assignment `export = ...`), or if you want to bail out from a script.
+This feature allows you to bypass TypeScript limitation - ts(1108) error.  
+You should only consider this as a last resort option (hint: try using export assignment `export = ...`), or if you want to bail out from a script.  
 Simply call `__return`, you may optionally pass additional arguments to be returned at call site.
 
 

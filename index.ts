@@ -62,6 +62,10 @@ const expectedClassTypeNameInPrototypeOf = createErrorDiagnosticFactory(
   "Expected a class type name in '__prototypeof'."
 );
 
+const expectedAssignmentLHSExpressionInSwap = createErrorDiagnosticFactory(
+  "Expected an assignment LHS expression in '__swap'."
+);
+
 const typedParamsUsedOutsideOfFunction = createErrorDiagnosticFactory(
   "'__typedparams' can not be used outside a function."
 );
@@ -191,6 +195,24 @@ const plugin: tstl.Plugin = {
                   if (tstl.isCallExpression(callExpr) && tstl.isIdentifier(callExpr.expression) &&
                     callExpr.expression.text === expr.expression.text) {
                     return tstl.createReturnStatement(callExpr.params, node);
+                  }
+                }
+              }
+              break;
+            }
+            case "__swap": {
+              if (expr.arguments.length === 2) {
+                for (const stmt of result) {
+                  if (tstl.isExpressionStatement(stmt)) {
+                    const callExpr = stmt.expression;
+                    if (tstl.isCallExpression(callExpr) && tstl.isIdentifier(callExpr.expression) &&
+                      callExpr.expression.text === expr.expression.text) {
+                      if (tstl.isAssignmentLeftHandSideExpression(callExpr.params[0]) && tstl.isAssignmentLeftHandSideExpression(callExpr.params[1])) {
+                        return tstl.createAssignmentStatement([callExpr.params[0], callExpr.params[1]], [callExpr.params[1], callExpr.params[0]], node);
+                      }
+                      context.diagnostics.push(expectedAssignmentLHSExpressionInSwap(node));
+                      break;
+                    }
                   }
                 }
               }

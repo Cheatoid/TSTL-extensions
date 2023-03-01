@@ -76,6 +76,12 @@ declare function __prototypeof<TClass extends AnyNotNil>(this: void): LuaIterabl
 declare function __return(this: void, ...args: any[]): void;
 
 /**
+ * Efficiently swaps the two values (without a temporary variable).
+ * @emits `left, right = right, left`
+ */
+declare function __swap<T>(this: void, left: T, right: T): void;
+
+/**
  * Provides an ability to preserve (and validate) parameters' type information of the parent function.
  * @param validator - The callback function which will receive parameters' type information.
  * @remarks
