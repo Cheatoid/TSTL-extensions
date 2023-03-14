@@ -1,8 +1,6 @@
-import * as fs from "fs";
 import * as ts from "typescript";
 import * as tstl from "typescript-to-lua";
 import { createSerialDiagnosticFactory } from "typescript-to-lua/dist/utils";
-import { parse } from "comment-json";
 
 //#region Courtesy of TSTL codebase :-)
 // https://github.com/TypeScriptToLua/TypeScriptToLua/blob/master/src/transformation/utils/diagnostics.ts
@@ -70,14 +68,20 @@ const typedParamsUsedOutsideOfFunction = createErrorDiagnosticFactory(
   "'__typedparams' can not be used outside a function."
 );
 
+interface PluginOptions {
+  hasContinue: boolean;
+}
+
+let pluginOptions: Partial<PluginOptions> = {};
+
 const plugin: tstl.Plugin = {
   beforeTransform(program, options, emitHost) {
     try {
-      // FIXME: Custom tsconfig option check doesn't work (despite being specified in the tsconfig file).
-      // This is a dirty fix for accessing our custom tsconfig properties.
-      const configText = fs.readFileSync(options.configFilePath, { encoding: "utf8" }); // (hopefully, it is the only tsconfig)
-      const customOptions = (parse(configText, undefined, true) as any)["tstlCustom"];
-      options["luaContinueSupport"] = customOptions["luaContinueSupport"] === true;
+      const settings = options.luaPlugins!.find((v) => v.name === "@cheatoid/tstl-extensions/index.js") as
+        (tstl.LuaPluginImport & Partial<PluginOptions>) | undefined;
+      pluginOptions = {
+        hasContinue: settings?.hasContinue === true,
+      };
     } catch {
       // ignored
     }
@@ -343,7 +347,7 @@ const plugin: tstl.Plugin = {
       return result;
     },
     [ts.SyntaxKind.ContinueStatement](node, context) {
-      if (context.options["luaContinueSupport"]) {
+      if (pluginOptions.hasContinue) {
         return tstl.createExpressionStatement(tstl.createIdentifier("continue", node), node);
       }
       return context.superTransformStatements(node);

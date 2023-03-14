@@ -5,8 +5,10 @@ Plugin for [TSTL](https://github.com/TypeScriptToLua/TypeScriptToLua) which prov
 
 ## 🛠 Installation
 1. Get the latest package from npm:
-    ```
-    npm i @cheatoid/tstl-extensions
+    ```shell
+    npm install -D @cheatoid/tstl-extensions
+    # or
+    yarn add -D @cheatoid/tstl-extensions
     ```
 2. Edit your `tsconfig.json` file accordingly to enable the plugin:
     ```diff
@@ -31,18 +33,17 @@ Note: This plugin exposes most of low-level functionality via special functions 
 
 ### ***`continue` support***
 If your target Lua environment supports `continue` statement (such as Garry's Mod Lua)...  
-Due to specific nature of this feature, you must explicitly opt-in by modifying your `tsconfig.json` file by appending the following on the bottom (outside of `"tstl"` node):
+Due to specific nature of this feature, you must explicitly opt-in by modifying your `tsconfig.json` file by appending the following:
 ```diff
 {
-  "compilerOptions": {
-    ...
-  },
   "tstl": {
-    ...
-  },
-+ "tstlCustom": {
-+   "luaContinueSupport": true
-+ }
+    "luaPlugins": [
+      {
+        "name": "@cheatoid/tstl-extensions/index.js",
++       "hasContinue": true
+      }
+    ]
+  }
 }
 ```
 With this change applied, you can use `continue` in your TS code and it will emit a `continue` statement in Lua.
