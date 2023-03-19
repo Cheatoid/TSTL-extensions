@@ -1,6 +1,6 @@
 {
   "name": "@cheatoid/tstl-extensions",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Plugin for TSTL which provides various low-level extensions",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
   },
   "peerDependencies": {
     "@typescript-to-lua/language-extensions": "^1.0.0",
-    "typescript": ">= 4.9.5 < 5",
+    "typescript": ">= 4.9.5 < 6",
     "typescript-to-lua": ">= 1.13.3 < 2"
   },
   "engines": {
